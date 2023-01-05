@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import {
 	Container,
 	FormControl,
@@ -20,6 +20,18 @@ import {
 const FormularioIngreso = () => {
 	const [show, setShow] = useState(false);
 	const handleClick = () => setShow(!show);
+	const refForm = useRef();
+
+	const obtenerDatosFormulario = (e) => {
+		const { current: form } = refForm;
+		const formData = new FormData(form);
+		const username = formData.get("username");
+		const email = formData.get("email");
+		const password = formData.get("password");
+
+		const user = { username, password, email };
+		console.log(user);
+	};
 
 	return (
 		<Container maxW="7xl" p={{ base: 5, md: 10 }}>
@@ -45,6 +57,7 @@ const FormularioIngreso = () => {
 					</Stack>
 
 					<VStack
+						ref={refForm}
 						as="form"
 						boxSize={{
 							base: "xs",
@@ -61,20 +74,22 @@ const FormularioIngreso = () => {
 						p={{ base: 5, sm: 10 }}
 						spacing={8}>
 						<VStack spacing={4} w="100%">
-							<FormControl id="email">
-								<FormLabel>Email</FormLabel>
-								<Input rounded="md" type="email" />
-							</FormControl>
-
 							<FormControl id="username">
 								<FormLabel>Username</FormLabel>
-								<Input rounded="md" type="text" />
+								<Input
+									required
+									name="username"
+									rounded="md"
+									type="text"
+								/>
 							</FormControl>
 
 							<FormControl id="password">
 								<FormLabel>Password</FormLabel>
 								<InputGroup size="md">
 									<Input
+										required
+										name="password"
 										rounded="md"
 										type={
 											show ? "text" : "password"
@@ -101,9 +116,22 @@ const FormularioIngreso = () => {
 									</InputRightElement>
 								</InputGroup>
 							</FormControl>
+
+							<FormControl id="email">
+								<FormLabel>Email</FormLabel>
+								<Input
+									name="email"
+									rounded="md"
+									type="email"
+									required
+								/>
+							</FormControl>
 						</VStack>
 						<VStack w="100%">
 							<Button
+								onClick={(e) =>
+									obtenerDatosFormulario(e)
+								}
 								bg="teal"
 								color="white"
 								_hover={{
