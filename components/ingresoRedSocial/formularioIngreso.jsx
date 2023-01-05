@@ -1,4 +1,5 @@
 import { useState, useRef } from "react";
+
 import {
 	Container,
 	FormControl,
@@ -16,6 +17,7 @@ import {
 	Link,
 	Text,
 } from "@chakra-ui/react";
+import swal from "sweetalert";
 
 const FormularioIngreso = () => {
 	const [show, setShow] = useState(false);
@@ -30,7 +32,26 @@ const FormularioIngreso = () => {
 		const password = formData.get("password");
 
 		const user = { username, password, email };
-		console.log(user);
+		//Utilizo la funcion check Validity para validar el input esta es interna del DOM
+		if (form.checkValidity()) {
+			console.log(user);
+			swal({
+				title: "¡Todo correcto!",
+				text: "El formulario se ha enviado correctamente.",
+				icon: "success",
+			});
+		} else {
+			//muestra los campos que no son correctos
+			const invalidFields =
+				form.querySelectorAll(":invalid");
+			invalidFields.forEach((campo) => {
+				swal({
+					title: "¡Error!",
+					text: `${campo.name} es inválido: ${campo.validationMessage}`,
+					icon: "error",
+				});
+			});
+		}
 	};
 
 	return (
