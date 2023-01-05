@@ -6,16 +6,21 @@ import {
 	Heading,
 	Text,
 	Button,
-	Image,
-	Icon,
-	IconButton,
-	createIcon,
-	IconProps,
-	useColorModeValue,
+	useDisclosure,
+	Modal,
+	ModalOverlay,
+	ModalContent,
+	ModalHeader,
+	ModalCloseButton,
+	ModalBody,
+	ModalFooter,
 } from "@chakra-ui/react";
 import FormularioIngreso from "./formularioIngreso";
+import FormularioCrearUsuario from "../FormularioCrearUsuario";
 
 export default function PaginaDeAcceso() {
+	const { isOpen, onOpen, onClose } = useDisclosure();
+
 	return (
 		<Container maxW={"7xl"}>
 			<Stack
@@ -59,6 +64,7 @@ export default function PaginaDeAcceso() {
 						alignItems={"center"}
 						p={"1px"}>
 						<Button
+							onClick={onOpen}
 							h={"50px"}
 							bg="teal"
 							color="white"
@@ -69,6 +75,38 @@ export default function PaginaDeAcceso() {
 							w="50%">
 							Create Acount
 						</Button>
+
+						<Modal isOpen={isOpen} onClose={onClose}>
+							<ModalOverlay />
+							<ModalContent>
+								<ModalHeader>
+									<Stack align="center">
+										<Heading
+											lineHeight={1.1}
+											fontWeight={600}
+											fontSize={{
+												base: "5xl",
+												sm: "5xl",
+												lg: "5xl",
+											}}>
+											<Text
+												as={"span"}
+												position={"relative"}
+												color={"teal"}>
+												Create Acount
+											</Text>
+											<br />
+										</Heading>
+									</Stack>
+								</ModalHeader>
+								<ModalCloseButton />
+								<ModalBody>
+									<FormularioCrearUsuario></FormularioCrearUsuario>
+								</ModalBody>
+
+								<ModalFooter></ModalFooter>
+							</ModalContent>
+						</Modal>
 					</Stack>
 				</Stack>
 
