@@ -54,18 +54,18 @@ const FormularioCrearUsuario = () => {
 
 						<SimpleGrid columns={2} spacing={10}>
 							<FormControl id="birthday">
-								<FormLabel>birthday</FormLabel>
+								<FormLabel>Birthday</FormLabel>
 								<Input rounded="md" type="date" />
 							</FormControl>
 
-							<FormControl id="sexo">
-								<FormLabel>sexo</FormLabel>
+							<FormControl id="gender">
+								<FormLabel>Gender</FormLabel>
 								<Select>
 									<option value="option1">
-										Hombre
+										Man
 									</option>
 									<option value="option2">
-										Mujer
+										Women
 									</option>
 								</Select>
 							</FormControl>
