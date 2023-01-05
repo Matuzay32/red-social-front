@@ -51,13 +51,27 @@ export default function PaginaDeAcceso() {
 						to see you grow and connect with others on
 						our social network! Welcome aboard!
 					</Text>
+
 					<Stack
-						spacing={{ base: 4, sm: 6 }}
-						direction={{
-							base: "column",
-							sm: "row",
-						}}></Stack>
+						w={"100%"}
+						display={"flex"}
+						justifyContent={"center"}
+						alignItems={"center"}
+						p={"1px"}>
+						<Button
+							h={"50px"}
+							bg="teal"
+							color="white"
+							_hover={{
+								bg: "teal.500",
+							}}
+							rounded="md"
+							w="50%">
+							Create Acount
+						</Button>
+					</Stack>
 				</Stack>
+
 				<Flex
 					_after={{
 						borderRadius: "30px",
