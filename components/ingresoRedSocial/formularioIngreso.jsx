@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-
+import { loginUsuarios } from "../../constants/users";
 import {
 	Container,
 	FormControl,
@@ -23,8 +23,9 @@ const FormularioIngreso = () => {
 	const [show, setShow] = useState(false);
 	const handleClick = () => setShow(!show);
 	const refForm = useRef();
+	const [userState, setUserState] = useState(null);
 
-	const obtenerDatosFormulario = (e) => {
+	const obtenerDatosFormulario = async (e) => {
 		const { current: form } = refForm;
 		const formData = new FormData(form);
 		const username = formData.get("username");
@@ -34,7 +35,10 @@ const FormularioIngreso = () => {
 		const user = { username, password, email };
 		//Utilizo la funcion check Validity para validar el input esta es interna del DOM
 		if (form.checkValidity()) {
-			console.log(user);
+			setUserState(user);
+			const datos = await loginUsuarios(userState);
+			console.log(datos);
+
 			swal({
 				title: "¡Todo correcto!",
 				text: "El formulario se ha enviado correctamente.",
