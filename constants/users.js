@@ -37,7 +37,11 @@ export const registerUsers = async (
 export const countrys = async (
 	url = "http://localhost:3000/countrys"
 ) => {
-	const res = await fetch(url);
-	const paises = await res.json();
-	return await paises;
+	try {
+		const res = await fetch(url);
+		const paises = await res.json();
+		return await paises;
+	} catch (error) {
+		console.log(error);
+	}
 };

@@ -19,15 +19,33 @@ import {
 	Box,
 	Select,
 } from "@chakra-ui/react";
-import { registerUsers } from "../constants/users";
+import {
+	countrys,
+	registerUsers,
+} from "../constants/users";
 
 const FormularioCrearUsuario = () => {
-	const [show, setShow] = useState(false);
-	const handleClick = () => setShow(!show);
-	const [userState, setUserState] = useState(null);
 	const refForm = useRef();
 
+	const [show, setShow] = useState(false);
+	const handleClick = () => setShow(!show);
+
+	const [userState, setUserState] = useState(null);
+	const [countryS, setCountryS] = useState([
+		{
+			_id: "63aaf10c1511d11d6c91b3f6",
+			name: "Argentina",
+			preffix: "ARG",
+		},
+		{
+			_id: "63ade22833d010ec8d9b7a37",
+			name: "lalala",
+			preffix: "dadasd",
+		},
+	]);
+
 	useEffect(() => {
+		countrys().then((x) => setCountryS(x));
 		return () => {};
 	}, []);
 
@@ -145,9 +163,15 @@ const FormularioCrearUsuario = () => {
 						<FormControl id="country">
 							<FormLabel>Country</FormLabel>
 							<Select name="country" required>
-								<option value="option1">
-									Argentina
-								</option>
+								{countryS?.map((e) => {
+									return (
+										<option
+											key={e._id}
+											value={e.id}>
+											{e.name}
+										</option>
+									);
+								})}
 							</Select>
 						</FormControl>
 
