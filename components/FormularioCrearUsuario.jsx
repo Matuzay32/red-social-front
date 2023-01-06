@@ -19,6 +19,7 @@ import {
 	Box,
 	Select,
 } from "@chakra-ui/react";
+import { registerUsers } from "../constants/users";
 
 const FormularioCrearUsuario = () => {
 	const [show, setShow] = useState(false);
@@ -32,7 +33,7 @@ const FormularioCrearUsuario = () => {
 		const formData = new FormData(form);
 		const name = formData.get("name");
 		const lastname = formData.get("lastname");
-		const gender = formData.get("gender");
+		// const gender = formData.get("gender");
 		const sentimental = formData.get("sentimental");
 		const country = formData.get("country");
 		const username = formData.get("username");
@@ -52,7 +53,7 @@ const FormularioCrearUsuario = () => {
 
 		if (form.checkValidity()) {
 			setUserState(user);
-			const datos = await loginUsuarios(userState);
+			const datos = await registerUsers(userState);
 			console.log(datos);
 
 			swal({
@@ -223,9 +224,7 @@ const FormularioCrearUsuario = () => {
 
 					<VStack w="100%">
 						<Button
-							onClick={(e) =>
-								obtenerDatosFormulario(e)
-							}
+							onClick={(e) => registerUsers(e)}
 							bg="teal"
 							color="white"
 							_hover={{
