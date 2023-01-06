@@ -22,6 +22,7 @@ import {
 import {
 	countrys,
 	registerUsers,
+	sentimental,
 } from "../constants/users";
 
 const FormularioCrearUsuario = () => {
@@ -37,15 +38,18 @@ const FormularioCrearUsuario = () => {
 			name: "Argentina",
 			preffix: "ARG",
 		},
+	]);
+	const [sentimentalS, setSentimentalS] = useState([
 		{
-			_id: "63ade22833d010ec8d9b7a37",
-			name: "lalala",
-			preffix: "dadasd",
+			_id: "63aaf10c1511d11d6c91b3f6",
+			name: "Argentina",
+			preffix: "ARG",
 		},
 	]);
 
 	useEffect(() => {
 		countrys().then((x) => setCountryS(x));
+		sentimental().then((x) => setSentimentalS(x));
 		return () => {};
 	}, []);
 
@@ -179,21 +183,15 @@ const FormularioCrearUsuario = () => {
 						<FormControl id="sentimental">
 							<FormLabel>Sentimental</FormLabel>
 							<Select name="sentimental" required>
-								<option value="option1">
-									Soltero
-								</option>
-
-								<option value="option2">
-									Soltera
-								</option>
-
-								<option value="option3">
-									Comprometido
-								</option>
-
-								<option value="option4">
-									Comprometida
-								</option>
+								{sentimentalS?.map((e) => {
+									return (
+										<option
+											key={e._id}
+											value={e.id}>
+											{e.name}
+										</option>
+									);
+								})}
 							</Select>
 						</FormControl>
 

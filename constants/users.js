@@ -45,3 +45,15 @@ export const countrys = async (
 		console.log(error);
 	}
 };
+
+export const sentimental = async (
+	url = "http://localhost:3000/sentimental"
+) => {
+	try {
+		const res = await fetch(url);
+		const paises = await res.json();
+		return await paises;
+	} catch (error) {
+		console.log(error);
+	}
+};
