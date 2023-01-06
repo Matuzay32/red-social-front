@@ -33,8 +33,8 @@ export default function PaginaDeAcceso() {
 						lineHeight={1.1}
 						fontWeight={600}
 						fontSize={{
-							base: "3xl",
-							sm: "4xl",
+							base: "5xl",
+							sm: "5xl",
 							lg: "6xl",
 						}}>
 						<Text as={"span"} position={"relative"}>
@@ -76,7 +76,10 @@ export default function PaginaDeAcceso() {
 							Create Acount
 						</Button>
 
-						<Modal isOpen={isOpen} onClose={onClose}>
+						<Modal
+							isOpen={isOpen}
+							onClose={onClose}
+							maxW={"30%"}>
 							<ModalOverlay />
 							<ModalContent>
 								<ModalHeader>
@@ -85,9 +88,9 @@ export default function PaginaDeAcceso() {
 											lineHeight={1.1}
 											fontWeight={600}
 											fontSize={{
-												base: "5xl",
-												sm: "5xl",
-												lg: "5xl",
+												base: "3xl",
+												sm: "3xl",
+												lg: "4xl",
 											}}>
 											<Text
 												as={"span"}

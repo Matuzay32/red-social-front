@@ -131,7 +131,7 @@ const FormularioCrearUsuario = () => {
 					h="max-content !important"
 					bg={useColorModeValue("white", "gray.700")}
 					rounded="lg"
-					p={{ base: 5, sm: 10 }}
+					p={{ base: 2, sm: 10 }}
 					spacing={8}>
 					<VStack spacing={4} w="100%">
 						<SimpleGrid columns={2} spacing={5}>
