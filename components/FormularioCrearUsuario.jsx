@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import {
 	Container,
 	FormControl,
@@ -24,10 +24,57 @@ const FormularioCrearUsuario = () => {
 	const [show, setShow] = useState(false);
 	const handleClick = () => setShow(!show);
 
+	const refForm = useRef();
+
+	const obtenerDatosFormulario = (e) => {
+		const { current: form } = refForm;
+		const formData = new FormData(form);
+		const name = formData.get("name");
+		const lastname = formData.get("lastname");
+		const gender = formData.get("gender");
+		const sentimental = formData.get("sentimental");
+		const country = formData.get("country");
+		const username = formData.get("username");
+		const password = formData.get("password");
+		const email = formData.get("email");
+
+		const user = {
+			name,
+			lastname,
+			gender,
+			sentimental,
+			username,
+			password,
+			email,
+			country,
+		};
+		//Utilizo la funcion check Validity para validar el input esta es interna del DOM
+		if (form.checkValidity()) {
+			console.log(user);
+			swal({
+				title: "¡Todo correcto!",
+				text: "El formulario se ha enviado correctamente.",
+				icon: "success",
+			});
+		} else {
+			//muestra los campos que no son correctos
+			const invalidFields =
+				form.querySelectorAll(":invalid");
+			invalidFields.forEach((campo) => {
+				swal({
+					title: "¡Error!",
+					text: `${campo.name} es inválido: ${campo.validationMessage}`,
+					icon: "error",
+				});
+			});
+		}
+	};
+
 	return (
 		<Center>
 			<Stack spacing={4}>
 				<VStack
+					ref={refForm}
 					as="form"
 					boxSize={{
 						base: "xs",
@@ -43,24 +90,39 @@ const FormularioCrearUsuario = () => {
 						<SimpleGrid columns={2} spacing={10}>
 							<FormControl id="name">
 								<FormLabel>Name</FormLabel>
-								<Input rounded="md" type="text" />
+								<Input
+									rounded="md"
+									type="text"
+									name="name"
+									required
+								/>
 							</FormControl>
 
 							<FormControl id="lastname">
 								<FormLabel>Lastname</FormLabel>
-								<Input rounded="md" type="text" />
+								<Input
+									rounded="md"
+									type="text"
+									name="lastname"
+									required
+								/>
 							</FormControl>
 						</SimpleGrid>
 
 						<SimpleGrid columns={2} spacing={10}>
 							<FormControl id="birthday">
 								<FormLabel>Birthday</FormLabel>
-								<Input rounded="md" type="date" />
+								<Input
+									rounded="md"
+									type="date"
+									name="birthday"
+									required
+								/>
 							</FormControl>
 
 							<FormControl id="gender">
 								<FormLabel>Gender</FormLabel>
-								<Select>
+								<Select name="gender" required>
 									<option value="option1">
 										Man
 									</option>
@@ -74,7 +136,7 @@ const FormularioCrearUsuario = () => {
 						{/* Esto voy a tener que hacerlo con un map */}
 						<FormControl id="country">
 							<FormLabel>Country</FormLabel>
-							<Select>
+							<Select name="country" required>
 								<option value="option1">
 									Argentina
 								</option>
@@ -84,20 +146,20 @@ const FormularioCrearUsuario = () => {
 						{/* Esto voy a tener que hacerlo con un map */}
 						<FormControl id="sentimental">
 							<FormLabel>Sentimental</FormLabel>
-							<Select>
+							<Select name="sentimental" required>
 								<option value="option1">
 									Soltero
 								</option>
 
-								<option value="option1">
+								<option value="option2">
 									Soltera
 								</option>
 
-								<option value="option1">
+								<option value="option3">
 									Comprometido
 								</option>
 
-								<option value="option1">
+								<option value="option4">
 									Comprometida
 								</option>
 							</Select>
@@ -105,18 +167,30 @@ const FormularioCrearUsuario = () => {
 
 						<FormControl id="email">
 							<FormLabel>Email</FormLabel>
-							<Input rounded="md" type="email" />
+							<Input
+								rounded="md"
+								name="email"
+								required
+								type="email"
+							/>
 						</FormControl>
 
 						<FormControl id="username">
 							<FormLabel>Username</FormLabel>
-							<Input rounded="md" type="text" />
+							<Input
+								name="username"
+								required
+								rounded="md"
+								type="text"
+							/>
 						</FormControl>
 
 						<FormControl id="password">
 							<FormLabel>Password</FormLabel>
 							<InputGroup size="md">
 								<Input
+									name="password"
+									required
 									rounded="md"
 									type={show ? "text" : "password"}
 								/>
@@ -145,6 +219,9 @@ const FormularioCrearUsuario = () => {
 
 					<VStack w="100%">
 						<Button
+							onClick={(e) =>
+								obtenerDatosFormulario(e)
+							}
 							bg="teal"
 							color="white"
 							_hover={{
