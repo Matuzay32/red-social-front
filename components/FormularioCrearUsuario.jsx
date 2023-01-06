@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
 	Container,
 	FormControl,
@@ -25,8 +25,11 @@ const FormularioCrearUsuario = () => {
 	const [show, setShow] = useState(false);
 	const handleClick = () => setShow(!show);
 	const [userState, setUserState] = useState(null);
-
 	const refForm = useRef();
+
+	useEffect(() => {
+		return () => {};
+	}, []);
 
 	const obtenerDatosFormulario = async (e) => {
 		const { current: form } = refForm;
@@ -224,7 +227,9 @@ const FormularioCrearUsuario = () => {
 
 					<VStack w="100%">
 						<Button
-							onClick={(e) => registerUsers(e)}
+							onClick={(e) =>
+								obtenerDatosFormulario(e)
+							}
 							bg="teal"
 							color="white"
 							_hover={{

@@ -1,3 +1,4 @@
+//METODO POST LOGIN
 export const loginUsers = async (
 	user,
 	url = "http://localhost:3000/auth/login"
@@ -14,12 +15,13 @@ export const loginUsers = async (
 		console.log(error);
 	}
 };
-
+//METODO POST REGISTRAR USUARIOS
 export const registerUsers = async (
 	user,
 	url = "http://localhost:3000/auth/register"
 ) => {
 	try {
+		console.log(user);
 		const res = await fetch(`${url}`, {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
@@ -30,4 +32,12 @@ export const registerUsers = async (
 	} catch (error) {
 		console.log(error);
 	}
+};
+
+export const countrys = async (
+	url = "http://localhost:3000/countrys"
+) => {
+	const res = await fetch(url);
+	const paises = await res.json();
+	return await paises;
 };
