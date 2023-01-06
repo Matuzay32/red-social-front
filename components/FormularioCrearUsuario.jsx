@@ -20,6 +20,7 @@ import {
 	Select,
 } from "@chakra-ui/react";
 import {
+	distribution,
 	countrys,
 	registerUsers,
 	sentimental,
@@ -46,10 +47,22 @@ const FormularioCrearUsuario = () => {
 			preffix: "ARG",
 		},
 	]);
+	const [distritionS, setDistributionS] = useState([
+		{
+			_id: "dsadad",
+			name: "dsadadsadasd",
+		},
+		{
+			_id: "63aaf0c31511d11d6c91b3ee",
+			name: "Publica",
+		},
+	]);
 
 	useEffect(() => {
+		//metodos Get
 		countrys().then((x) => setCountryS(x));
 		sentimental().then((x) => setSentimentalS(x));
+		distribution().then((x) => setDistributionS(x));
 		return () => {};
 	}, []);
 
@@ -58,25 +71,29 @@ const FormularioCrearUsuario = () => {
 		const formData = new FormData(form);
 		const name = formData.get("name");
 		const lastname = formData.get("lastname");
+		const birthday = formData.get("birthday");
 		// const gender = formData.get("gender");
 		const sentimental = formData.get("sentimental");
 		const country = formData.get("country");
 		const username = formData.get("username");
 		const password = formData.get("password");
 		const email = formData.get("email");
+		const distribution = formData.get("distribution");
 
 		const user = {
-			name,
-			lastname,
-			gender,
-			sentimental,
-			username,
 			password,
 			email,
-			country,
+			username,
+			name,
+			lastName: lastname,
+			birthday: new Date(birthday),
+			countryId: country,
+			sentimentalId: sentimental,
+			distributionId: distribution,
 		};
 
 		if (form.checkValidity()) {
+			console.log(user);
 			setUserState(user);
 			const datos = await registerUsers(userState);
 			console.log(datos);
@@ -117,7 +134,7 @@ const FormularioCrearUsuario = () => {
 					p={{ base: 5, sm: 10 }}
 					spacing={8}>
 					<VStack spacing={4} w="100%">
-						<SimpleGrid columns={2} spacing={10}>
+						<SimpleGrid columns={2} spacing={5}>
 							<FormControl id="name">
 								<FormLabel>Name</FormLabel>
 								<Input
@@ -139,7 +156,7 @@ const FormularioCrearUsuario = () => {
 							</FormControl>
 						</SimpleGrid>
 
-						<SimpleGrid columns={2} spacing={10}>
+						<SimpleGrid columns={2} spacing={5}>
 							<FormControl id="birthday">
 								<FormLabel>Birthday</FormLabel>
 								<Input
@@ -163,7 +180,6 @@ const FormularioCrearUsuario = () => {
 							</FormControl>
 						</SimpleGrid>
 
-						{/* Esto voy a tener que hacerlo con un map */}
 						<FormControl id="country">
 							<FormLabel>Country</FormLabel>
 							<Select name="country" required>
@@ -171,7 +187,7 @@ const FormularioCrearUsuario = () => {
 									return (
 										<option
 											key={e._id}
-											value={e.id}>
+											value={e._id}>
 											{e.name}
 										</option>
 									);
@@ -179,7 +195,6 @@ const FormularioCrearUsuario = () => {
 							</Select>
 						</FormControl>
 
-						{/* Esto voy a tener que hacerlo con un map */}
 						<FormControl id="sentimental">
 							<FormLabel>Sentimental</FormLabel>
 							<Select name="sentimental" required>
@@ -187,7 +202,22 @@ const FormularioCrearUsuario = () => {
 									return (
 										<option
 											key={e._id}
-											value={e.id}>
+											value={e._id}>
+											{e.name}
+										</option>
+									);
+								})}
+							</Select>
+						</FormControl>
+
+						<FormControl id="distribution">
+							<FormLabel>Tipo de cuenta</FormLabel>
+							<Select name="distribution" required>
+								{distritionS?.map((e) => {
+									return (
+										<option
+											key={e._id}
+											value={e._id}>
 											{e.name}
 										</option>
 									);

@@ -57,3 +57,15 @@ export const sentimental = async (
 		console.log(error);
 	}
 };
+
+export const distribution = async (
+	url = "http://localhost:3000/distributions"
+) => {
+	try {
+		const res = await fetch(url);
+		const paises = await res.json();
+		return await paises;
+	} catch (error) {
+		console.log(error);
+	}
+};
