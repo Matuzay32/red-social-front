@@ -23,10 +23,11 @@ import {
 const FormularioCrearUsuario = () => {
 	const [show, setShow] = useState(false);
 	const handleClick = () => setShow(!show);
+	const [userState, setUserState] = useState(null);
 
 	const refForm = useRef();
 
-	const obtenerDatosFormulario = (e) => {
+	const obtenerDatosFormulario = async (e) => {
 		const { current: form } = refForm;
 		const formData = new FormData(form);
 		const name = formData.get("name");
@@ -48,9 +49,12 @@ const FormularioCrearUsuario = () => {
 			email,
 			country,
 		};
-		//Utilizo la funcion check Validity para validar el input esta es interna del DOM
+
 		if (form.checkValidity()) {
-			console.log(user);
+			setUserState(user);
+			const datos = await loginUsuarios(userState);
+			console.log(datos);
+
 			swal({
 				title: "¡Todo correcto!",
 				text: "El formulario se ha enviado correctamente.",
