@@ -21,7 +21,6 @@ export const registerUsers = async (
 	url = "http://localhost:3000/auth/register"
 ) => {
 	try {
-		console.log(user);
 		const res = await fetch(`${url}`, {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
@@ -60,6 +59,18 @@ export const sentimental = async (
 
 export const distribution = async (
 	url = "http://localhost:3000/distributions"
+) => {
+	try {
+		const res = await fetch(url);
+		const paises = await res.json();
+		return await paises;
+	} catch (error) {
+		console.log(error);
+	}
+};
+
+export const gender = async (
+	url = "http://localhost:3000/gender"
 ) => {
 	try {
 		const res = await fetch(url);

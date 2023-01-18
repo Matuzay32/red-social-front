@@ -24,6 +24,7 @@ import {
 	countrys,
 	registerUsers,
 	sentimental,
+	gender,
 } from "../constants/users";
 
 const FormularioCrearUsuario = () => {
@@ -40,6 +41,8 @@ const FormularioCrearUsuario = () => {
 			preffix: "ARG",
 		},
 	]);
+	const [genderS, setGenderS] = useState([{}]);
+
 	const [sentimentalS, setSentimentalS] = useState([
 		{
 			_id: "63aaf10c1511d11d6c91b3f6",
@@ -61,6 +64,7 @@ const FormularioCrearUsuario = () => {
 	useEffect(() => {
 		//metodos Get
 		countrys().then((x) => setCountryS(x));
+		gender().then((x) => setGenderS(x));
 		sentimental().then((x) => setSentimentalS(x));
 		distribution().then((x) => setDistributionS(x));
 		return () => {};
@@ -72,7 +76,7 @@ const FormularioCrearUsuario = () => {
 		const name = formData.get("name");
 		const lastname = formData.get("lastname");
 		const birthday = formData.get("birthday");
-		// const gender = formData.get("gender");
+		const gender = formData.get("gender");
 		const sentimental = formData.get("sentimental");
 		const country = formData.get("country");
 		const username = formData.get("username");
@@ -88,21 +92,35 @@ const FormularioCrearUsuario = () => {
 			lastName: lastname,
 			birthday: new Date(birthday),
 			countryId: country,
+			genderId: gender,
 			sentimentalId: sentimental,
 			distributionId: distribution,
 		};
 
 		if (form.checkValidity()) {
-			console.log(user);
 			setUserState(user);
-			const datos = await registerUsers(userState);
-			console.log(datos);
 
-			swal({
-				title: "¡Todo correcto!",
-				text: "El formulario se ha enviado correctamente.",
-				icon: "success",
-			});
+			const datos = await registerUsers(userState);
+
+			if (datos.status === 200) {
+				swal({
+					title: "User Created!",
+					text: `Bienvenido ${user.name} `,
+					icon: "success",
+				});
+			} else {
+				swal({
+					title: "¡Error!",
+					text: ` ${
+						datos?.message
+							? "El usuario con email" +
+							  user.email +
+							  " ya existe"
+							: "No se pudo crear el usuario intente nuevamente"
+					}`,
+					icon: "error",
+				});
+			}
 		} else {
 			//muestra los campos que no son correctos
 			const invalidFields =
@@ -170,12 +188,15 @@ const FormularioCrearUsuario = () => {
 							<FormControl id="gender">
 								<FormLabel>Gender</FormLabel>
 								<Select name="gender" required>
-									<option value="option1">
-										Man
-									</option>
-									<option value="option2">
-										Women
-									</option>
+									{genderS?.map((e) => {
+										return (
+											<option
+												key={e._id}
+												value={e._id}>
+												{e.name}
+											</option>
+										);
+									})}
 								</Select>
 							</FormControl>
 						</SimpleGrid>
@@ -297,5 +318,4 @@ const FormularioCrearUsuario = () => {
 		</Center>
 	);
 };
-
 export default FormularioCrearUsuario;
