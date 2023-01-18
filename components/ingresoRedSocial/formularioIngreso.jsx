@@ -19,7 +19,7 @@ import {
 } from "@chakra-ui/react";
 import swal from "sweetalert";
 
-const FormularioIngreso = () => {
+const FormularioIngreso = (e) => {
 	const [show, setShow] = useState(false);
 	const handleClick = () => setShow(!show);
 	const refForm = useRef();
@@ -33,22 +33,47 @@ const FormularioIngreso = () => {
 		const password = formData.get("password");
 
 		const user = { username, password, email };
+
+		setUserState(user);
 		//Utilizo la funcion check Validity para validar el input esta es interna del DOM
 		if (form.checkValidity()) {
-			setUserState(user);
 			const datos = await loginUsers(userState);
 			console.log(datos);
 
-			swal({
-				title: "¡Todo correcto!",
-				text: "El formulario se ha enviado correctamente.",
-				icon: "success",
-			});
+			if (datos.statusCode === 200) {
+				swal({
+					title: "¡Todo correcto!",
+					text: "El login se ha realizado correctamente.",
+					icon: "success",
+				});
+				form.reset();
+			} else if (datos.statusCode === 403) {
+				swal({
+					title: "¡Error!",
+					text: "Incorrect Password",
+					icon: "error",
+				});
+			} else if (datos.statusCode === 404) {
+				swal({
+					title: "¡Error!",
+					text: "Usuario no encontrado, debe crear uno",
+					icon: "error",
+				});
+			} else {
+				swal({
+					title: "¡Error!",
+					text: "Ha ocurrido un error, por favor intente nuevamente",
+					icon: "error",
+				});
+			}
 		} else {
-			//muestra los campos que no son correctos
 			const invalidFields =
-				form.querySelectorAll(":invalid");
-			invalidFields.forEach((campo) => {
+				form.querySelectorAll("input:invalid");
+			const reversedFields = [
+				...invalidFields,
+			].reverse();
+			console.log(reversedFields);
+			reversedFields.forEach((campo) => {
 				swal({
 					title: "¡Error!",
 					text: `${campo.name} es inválido: ${campo.validationMessage}`,

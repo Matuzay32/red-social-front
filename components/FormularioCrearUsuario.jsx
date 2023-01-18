@@ -124,10 +124,12 @@ const FormularioCrearUsuario = ({ onClose }) => {
 				});
 			}
 		} else {
-			//muestra los campos que no son correctos
 			const invalidFields =
-				form.querySelectorAll(":invalid");
-			invalidFields.forEach((campo) => {
+				form.querySelectorAll("input:invalid");
+			const reversedFields = [
+				...invalidFields,
+			].reverse();
+			reversedFields.forEach((campo) => {
 				swal({
 					title: "¡Error!",
 					text: `${campo.name} es inválido: ${campo.validationMessage}`,
@@ -171,7 +173,6 @@ const FormularioCrearUsuario = ({ onClose }) => {
 									rounded="md"
 									type="text"
 									name="lastname"
-									required
 								/>
 							</FormControl>
 						</SimpleGrid>
