@@ -27,7 +27,7 @@ import {
 	gender,
 } from "../constants/users";
 
-const FormularioCrearUsuario = () => {
+const FormularioCrearUsuario = ({ onClose }) => {
 	const refForm = useRef();
 
 	const [show, setShow] = useState(false);
@@ -108,6 +108,8 @@ const FormularioCrearUsuario = () => {
 					text: `Bienvenido ${user.name} `,
 					icon: "success",
 				});
+				form.reset();
+				onClose(false);
 			} else {
 				swal({
 					title: "¡Error!",

@@ -104,7 +104,10 @@ export default function PaginaDeAcceso() {
 								</ModalHeader>
 								<ModalCloseButton />
 								<ModalBody>
-									<FormularioCrearUsuario></FormularioCrearUsuario>
+									<FormularioCrearUsuario
+										onClose={
+											onClose
+										}></FormularioCrearUsuario>
 								</ModalBody>
 
 								<ModalFooter></ModalFooter>
