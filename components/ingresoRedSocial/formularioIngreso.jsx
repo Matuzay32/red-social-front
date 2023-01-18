@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import { loginUsuarios } from "../../constants/users";
+import { loginUsers } from "../../constants/users";
 import {
 	Container,
 	FormControl,
@@ -36,7 +36,7 @@ const FormularioIngreso = () => {
 		//Utilizo la funcion check Validity para validar el input esta es interna del DOM
 		if (form.checkValidity()) {
 			setUserState(user);
-			const datos = await loginUsuarios(userState);
+			const datos = await loginUsers(userState);
 			console.log(datos);
 
 			swal({
