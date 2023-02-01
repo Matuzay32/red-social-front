@@ -69,11 +69,11 @@ const FormularioCrearUsuario = ({ onClose }) => {
 			username,
 			name,
 			lastName: lastname,
+			country_id: country,
+			gender_id: gender,
+			sentimental_id: sentimental,
+			typeAcount_id: distribution,
 			// birthday: new Date(birthday),
-			countryId: country,
-			genderId: gender,
-			sentimentalId: sentimental,
-			distributionId: distribution,
 		};
 
 		if (form.checkValidity()) {
