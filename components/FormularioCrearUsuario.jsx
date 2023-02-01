@@ -75,7 +75,7 @@ const FormularioCrearUsuario = ({ onClose }) => {
 			typeAcount_id: distribution,
 			// birthday: new Date(birthday),
 		};
-
+		console.log(user);
 		if (form.checkValidity()) {
 			setUserState(user);
 
@@ -173,8 +173,8 @@ const FormularioCrearUsuario = ({ onClose }) => {
 									{genderS?.map((e) => {
 										return (
 											<option
-												key={e.gender_id}
-												value={e.gender_id}>
+												key={e.gander_id}
+												value={e.gander_id}>
 												{e.name}
 											</option>
 										);
