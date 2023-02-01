@@ -34,7 +34,7 @@ export const registerUsers = async (
 };
 
 export const countrys = async (
-	url = "http://localhost:3000/countrys"
+	url = "http://localhost:3000/countries"
 ) => {
 	try {
 		const res = await fetch(url);
@@ -58,7 +58,7 @@ export const sentimental = async (
 };
 
 export const distribution = async (
-	url = "http://localhost:3000/distributions"
+	url = "http://localhost:3000/type-acount"
 ) => {
 	try {
 		const res = await fetch(url);

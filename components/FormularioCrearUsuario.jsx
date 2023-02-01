@@ -54,7 +54,7 @@ const FormularioCrearUsuario = ({ onClose }) => {
 		const formData = new FormData(form);
 		const name = formData.get("name");
 		const lastname = formData.get("lastname");
-		const birthday = formData.get("birthday");
+		// const birthday = formData.get("birthday");
 		const gender = formData.get("gender");
 		const sentimental = formData.get("sentimental");
 		const country = formData.get("country");
@@ -69,7 +69,7 @@ const FormularioCrearUsuario = ({ onClose }) => {
 			username,
 			name,
 			lastName: lastname,
-			birthday: new Date(birthday),
+			// birthday: new Date(birthday),
 			countryId: country,
 			genderId: gender,
 			sentimentalId: sentimental,
@@ -170,15 +170,15 @@ const FormularioCrearUsuario = ({ onClose }) => {
 							<FormControl id="gender">
 								<FormLabel>Gender</FormLabel>
 								<Select name="gender" required>
-									{/* {genderS?.map((e) => {
+									{genderS?.map((e) => {
 										return (
 											<option
-												key={e._id}
-												value={e._id}>
+												key={e.gender_id}
+												value={e.gender_id}>
 												{e.name}
 											</option>
 										);
-									})} */}
+									})}
 								</Select>
 							</FormControl>
 						</SimpleGrid>
@@ -186,45 +186,45 @@ const FormularioCrearUsuario = ({ onClose }) => {
 						<FormControl id="country">
 							<FormLabel>Country</FormLabel>
 							<Select name="country" required>
-								{/* {countryS?.map((e) => {
+								{countryS?.map((e) => {
 									return (
 										<option
-											key={e._id}
-											value={e._id}>
+											key={e.country_id}
+											value={e.country_id}>
 											{e.name}
 										</option>
 									);
-								})} */}
+								})}
 							</Select>
 						</FormControl>
 
 						<FormControl id="sentimental">
 							<FormLabel>Sentimental</FormLabel>
 							<Select name="sentimental" required>
-								{/* {sentimentalS?.map((e) => {
+								{sentimentalS?.map((e) => {
 									return (
 										<option
-											key={e._id}
-											value={e._id}>
+											key={e.sentimental_id}
+											value={e.sentimental_id}>
 											{e.name}
 										</option>
 									);
-								})} */}
+								})}
 							</Select>
 						</FormControl>
 
 						<FormControl id="distribution">
 							<FormLabel>Tipo de cuenta</FormLabel>
 							<Select name="distribution" required>
-								{/* {distritionS?.map((e) => {
+								{distritionS?.map((e) => {
 									return (
 										<option
-											key={e._id}
-											value={e._id}>
+											key={e.typeAcount_id}
+											value={e.typeAcount_id}>
 											{e.name}
 										</option>
 									);
-								})} */}
+								})}
 							</Select>
 						</FormControl>
 
