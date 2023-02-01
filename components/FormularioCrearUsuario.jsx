@@ -34,32 +34,11 @@ const FormularioCrearUsuario = ({ onClose }) => {
 	const handleClick = () => setShow(!show);
 
 	const [userState, setUserState] = useState(null);
-	const [countryS, setCountryS] = useState([
-		{
-			_id: "63aaf10c1511d11d6c91b3f6",
-			name: "Argentina",
-			preffix: "ARG",
-		},
-	]);
+	const [countryS, setCountryS] = useState([{}]);
 	const [genderS, setGenderS] = useState([{}]);
 
-	const [sentimentalS, setSentimentalS] = useState([
-		{
-			_id: "63aaf10c1511d11d6c91b3f6",
-			name: "Argentina",
-			preffix: "ARG",
-		},
-	]);
-	const [distritionS, setDistributionS] = useState([
-		{
-			_id: "dsadad",
-			name: "dsadadsadasd",
-		},
-		{
-			_id: "63aaf0c31511d11d6c91b3ee",
-			name: "Publica",
-		},
-	]);
+	const [sentimentalS, setSentimentalS] = useState([{}]);
+	const [distritionS, setDistributionS] = useState([{}]);
 
 	useEffect(() => {
 		//metodos Get
@@ -191,7 +170,7 @@ const FormularioCrearUsuario = ({ onClose }) => {
 							<FormControl id="gender">
 								<FormLabel>Gender</FormLabel>
 								<Select name="gender" required>
-									{genderS?.map((e) => {
+									{/* {genderS?.map((e) => {
 										return (
 											<option
 												key={e._id}
@@ -199,7 +178,7 @@ const FormularioCrearUsuario = ({ onClose }) => {
 												{e.name}
 											</option>
 										);
-									})}
+									})} */}
 								</Select>
 							</FormControl>
 						</SimpleGrid>
@@ -207,7 +186,7 @@ const FormularioCrearUsuario = ({ onClose }) => {
 						<FormControl id="country">
 							<FormLabel>Country</FormLabel>
 							<Select name="country" required>
-								{countryS?.map((e) => {
+								{/* {countryS?.map((e) => {
 									return (
 										<option
 											key={e._id}
@@ -215,14 +194,14 @@ const FormularioCrearUsuario = ({ onClose }) => {
 											{e.name}
 										</option>
 									);
-								})}
+								})} */}
 							</Select>
 						</FormControl>
 
 						<FormControl id="sentimental">
 							<FormLabel>Sentimental</FormLabel>
 							<Select name="sentimental" required>
-								{sentimentalS?.map((e) => {
+								{/* {sentimentalS?.map((e) => {
 									return (
 										<option
 											key={e._id}
@@ -230,14 +209,14 @@ const FormularioCrearUsuario = ({ onClose }) => {
 											{e.name}
 										</option>
 									);
-								})}
+								})} */}
 							</Select>
 						</FormControl>
 
 						<FormControl id="distribution">
 							<FormLabel>Tipo de cuenta</FormLabel>
 							<Select name="distribution" required>
-								{distritionS?.map((e) => {
+								{/* {distritionS?.map((e) => {
 									return (
 										<option
 											key={e._id}
@@ -245,7 +224,7 @@ const FormularioCrearUsuario = ({ onClose }) => {
 											{e.name}
 										</option>
 									);
-								})}
+								})} */}
 							</Select>
 						</FormControl>
 

@@ -35,7 +35,6 @@ const FormularioIngreso = (e) => {
 		const user = { username, password, email };
 
 		setUserState(user);
-		//Utilizo la funcion check Validity para validar el input esta es interna del DOM
 		if (form.checkValidity()) {
 			const datos = await loginUsers(userState);
 			console.log(datos);
